@@ -12,7 +12,7 @@ const Table = () => {
           {DUMMY_DATA.map((data, index) => (
             <TableRow
               key={index}
-              index={index}
+              index={index + 1}
               name={data.name}
               description={data.description}
               xCoordinate={data.xCoordinate}

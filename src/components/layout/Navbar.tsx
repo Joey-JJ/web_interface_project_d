@@ -7,7 +7,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 flex justify-between px-4">
+    <div className="navbar bg-base-200 flex justify-between px-4">
       <a href="/" className="btn btn-ghost normal-case text-xl">
         Data Hub - Project D
       </a>
