@@ -43,7 +43,7 @@ const TableRow: React.FC<TableRowProps> = ({
         checked={openModal}
       />
       <div className="modal">
-        <form className="modal-box">
+        <form className="modal-box" onSubmit={submitHandler}>
           <h3 className="font-bold text-lg">You are now editing: {name}</h3>
           <div className="py-4 flex flex-col gap-4">
             <input
@@ -68,11 +68,7 @@ const TableRow: React.FC<TableRowProps> = ({
             />
           </div>
           <div className="modal-action">
-            <button
-              className="btn btn-primary"
-              onClick={submitHandler}
-              type="submit"
-            >
+            <button className="btn btn-primary" type="submit">
               Submit
             </button>
             <button
