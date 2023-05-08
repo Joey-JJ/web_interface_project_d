@@ -1,5 +1,5 @@
 export type Building = {
-  // id: string;
+  id: string;
   name: string;
   description: string;
   xCoordinate: number;
