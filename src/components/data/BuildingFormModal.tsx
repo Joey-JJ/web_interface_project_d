@@ -1,25 +1,28 @@
 import React from "react";
 import { useForm } from "../../hooks/useForm";
+import { Building } from "../../types/Building";
 
 type BuildingFormModalProps = {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit: any; // TODO: FIX ANY
-  name: string;
+  onSubmit: (...args: any[]) => void;
+  selectedBuilding?: Building;
 };
 
 const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   openModal,
   setOpenModal,
   onSubmit,
-  name,
+  selectedBuilding,
 }) => {
-  const { formData, handleChange, setFormData } = useForm({
+  const initialFormdata = selectedBuilding ?? {
     name: "",
     description: "",
-    xCoordinate: 0,
-    yCoordinate: 0,
-  });
+    lon: 0,
+    lat: 0,
+  };
+
+  const { formData, handleChange, setFormData } = useForm(initialFormdata);
 
   return (
     <>
@@ -28,13 +31,16 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
         id="my-modal"
         className="modal-toggle"
         checked={openModal}
+        onChange={(e) => setOpenModal(e.target.checked)}
       />
       <div className="modal">
         <form
           className="modal-box"
           onSubmit={(e) => onSubmit(e, formData, setFormData)}
         >
-          <h3 className="font-bold text-lg">You are now editing: {name}</h3>
+          <h3 className="font-bold text-lg">
+            You are now editing: {selectedBuilding?.name ?? "New building"}
+          </h3>
           <div className="py-4 flex flex-col gap-4">
             <input
               type="text"
@@ -54,19 +60,19 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
             />
             <input
               type="number"
-              placeholder="X-coordinate"
+              placeholder="Longitude"
               className="input input-sm input-primary"
               onChange={handleChange}
-              name="xCoordinate"
-              value={formData.xCoordinate}
+              name="Longitude"
+              value={formData.lon}
             />
             <input
               type="number"
-              placeholder="Y-coordinate"
+              placeholder="Latitude"
               className="input input-sm input-primary"
               onChange={handleChange}
-              name="yCoordinate"
-              value={formData.yCoordinate}
+              name="Latitude"
+              value={formData.lat}
             />
           </div>
           <div className="modal-action">

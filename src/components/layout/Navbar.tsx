@@ -22,6 +22,7 @@ const Navbar = () => {
       xCoordinate: 0,
       yCoordinate: 0,
     });
+    setOpenModal(false);
   };
 
   const onLogout = () => {
@@ -47,7 +48,6 @@ const Navbar = () => {
       </div>
 
       <BuildingFormModal
-        name="New building"
         onSubmit={addBuilding}
         openModal={openModal}
         setOpenModal={setOpenModal}

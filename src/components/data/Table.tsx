@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { DUMMY_DATA } from "../../utils/constants";
+import React, { useEffect, useState, useRef } from "react";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import { Building } from "../../types/Building";
 import BuildingFormModal from "./BuildingFormModal";
 import { supabase } from "../../utils/supabaseClient";
 
-const Table = () => {
+const Table: React.FC = () => {
   const [buildings, setBuildings] = useState([] as Building[]);
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const currentBuildingRef = useRef<Building | undefined>();
 
   useEffect(() => {
     const getBuildings = async () => {
@@ -40,6 +40,7 @@ const Table = () => {
               index={index + 1}
               buildingData={building}
               onClick={() => {
+                currentBuildingRef.current = building;
                 setOpenModal(true);
               }}
             />
@@ -47,12 +48,12 @@ const Table = () => {
         </tbody>
       </table>
       <BuildingFormModal
-        name=""
         onSubmit={async () => {
           return;
         }}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        selectedBuilding={currentBuildingRef.current}
       />
     </div>
   );
