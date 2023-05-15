@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Building } from "../../types/Building";
+import { DEFAULT_FORM_DATA } from "../../utils/constants";
 
 type BuildingFormModalProps = {
   openModal: boolean;
@@ -15,12 +16,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   onSubmit,
   selectedBuilding,
 }) => {
-  const { formData, handleChange, setFormData } = useForm({
-    name: "",
-    description: "",
-    lon: 0,
-    lat: 0,
-  });
+  const { formData, handleChange, setFormData } = useForm(DEFAULT_FORM_DATA);
 
   useEffect(() => {
     if (selectedBuilding) {

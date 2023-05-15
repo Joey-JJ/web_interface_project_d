@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-import { Building } from "../../types/Building";
 import BuildingFormModal from "./BuildingFormModal";
 import { supabase } from "../../utils/supabaseClient";
+import type { FormData } from "../../hooks/useForm";
+import type { Building } from "../../types/Building";
+import { BuildingFormData } from "../../types/BuildingFormData";
+import { DEFAULT_FORM_DATA } from "../../utils/constants";
 
 const Table: React.FC = () => {
   const [buildings, setBuildings] = useState([] as Building[]);
@@ -24,6 +27,27 @@ const Table: React.FC = () => {
 
     getBuildings();
   }, []);
+
+  const onSubmit = async (
+    e: any,
+    formData: FormData<BuildingFormData>,
+    setFormData: React.Dispatch<
+      React.SetStateAction<FormData<BuildingFormData>>
+    >
+  ) => {
+    const { error } = await supabase
+      .from("buildings")
+      .update(formData)
+      .eq("id", currentBuildingRef.current!.id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setFormData(DEFAULT_FORM_DATA);
+    setOpenModal(false);
+  };
 
   if (buildings.length === 0) {
     return <div>No buildings in the database</div>;
@@ -48,9 +72,7 @@ const Table: React.FC = () => {
         </tbody>
       </table>
       <BuildingFormModal
-        onSubmit={async () => {
-          return;
-        }}
+        onSubmit={onSubmit}
         openModal={openModal}
         setOpenModal={setOpenModal}
         selectedBuilding={currentBuildingRef.current}

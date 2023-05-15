@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-type FormData<T> = {
+export type FormData<T> = {
   [key in keyof T]: any;
 };
 
