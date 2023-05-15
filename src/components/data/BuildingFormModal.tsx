@@ -17,6 +17,10 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   selectedBuilding,
 }) => {
   const { formData, handleChange, setFormData } = useForm(DEFAULT_FORM_DATA);
+  const onCancel = () => {
+    setFormData(selectedBuilding ?? DEFAULT_FORM_DATA);
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     if (selectedBuilding) {
@@ -84,11 +88,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
             <button className="btn btn-primary" type="submit">
               Submit
             </button>
-            <button
-              className="btn btn-ghost"
-              type="button"
-              onClick={() => setOpenModal(false)}
-            >
+            <button className="btn btn-ghost" type="button" onClick={onCancel}>
               Cancel
             </button>
           </div>
