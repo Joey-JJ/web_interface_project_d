@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Building } from "../../types/Building";
 
@@ -15,14 +15,23 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   onSubmit,
   selectedBuilding,
 }) => {
-  const initialFormdata = selectedBuilding ?? {
+  const { formData, handleChange, setFormData } = useForm({
     name: "",
     description: "",
     lon: 0,
     lat: 0,
-  };
+  });
 
-  const { formData, handleChange, setFormData } = useForm(initialFormdata);
+  useEffect(() => {
+    if (selectedBuilding) {
+      setFormData({
+        name: selectedBuilding.name,
+        description: selectedBuilding.description,
+        lon: selectedBuilding.lon,
+        lat: selectedBuilding.lat,
+      });
+    }
+  }, [selectedBuilding, setFormData]);
 
   return (
     <>
@@ -63,7 +72,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
               placeholder="Longitude"
               className="input input-sm input-primary"
               onChange={handleChange}
-              name="Longitude"
+              name="lon"
               value={formData.lon}
             />
             <input
@@ -71,7 +80,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
               placeholder="Latitude"
               className="input input-sm input-primary"
               onChange={handleChange}
-              name="Latitude"
+              name="lat"
               value={formData.lat}
             />
           </div>

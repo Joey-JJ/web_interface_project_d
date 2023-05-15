@@ -1,7 +1,7 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 type FormData<T> = {
-  [key in keyof T]: string;
+  [key in keyof T]: any;
 };
 
 type UseForm<T> = {
@@ -14,10 +14,6 @@ export const useForm = <T>(initialState: T): UseForm<T> => {
   const [formData, setFormData] = useState<FormData<T>>(
     initialState as FormData<T>
   );
-
-  useEffect(() => {
-    setFormData(initialState as FormData<T>);
-  }, [initialState]);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
