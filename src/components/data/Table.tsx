@@ -13,18 +13,18 @@ const Table: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const currentBuildingRef = useRef<Building | undefined>();
 
+  const getBuildings = async () => {
+    const { data, error } = await supabase.from("buildings").select("*");
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setBuildings(data as Building[]);
+  };
+
   useEffect(() => {
-    const getBuildings = async () => {
-      const { data, error } = await supabase.from("buildings").select("*");
-
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      setBuildings(data as Building[]);
-    };
-
     getBuildings();
   }, []);
 
@@ -75,6 +75,7 @@ const Table: React.FC = () => {
         onSubmit={onSubmit}
         openModal={openModal}
         setOpenModal={setOpenModal}
+        getBuildings={getBuildings}
         selectedBuilding={currentBuildingRef.current}
       />
     </div>

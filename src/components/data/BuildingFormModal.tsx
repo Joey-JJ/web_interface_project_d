@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Building } from "../../types/Building";
 import { DEFAULT_FORM_DATA } from "../../utils/constants";
+import { supabase } from "../../utils/supabaseClient";
 
 type BuildingFormModalProps = {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
   onSubmit: (...args: any[]) => void;
+  getBuildings?: () => void;
   selectedBuilding?: Building;
 };
 
@@ -15,8 +17,26 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   setOpenModal,
   onSubmit,
   selectedBuilding,
+  getBuildings,
 }) => {
   const { formData, handleChange, setFormData } = useForm(DEFAULT_FORM_DATA);
+
+  const onDelete = async () => {
+    const { error } = await supabase
+      .from("buildings")
+      .delete()
+      .eq("id", selectedBuilding!.id);
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setFormData(DEFAULT_FORM_DATA);
+    getBuildings?.();
+    setOpenModal(false);
+  };
+
   const onCancel = () => {
     setFormData(selectedBuilding ?? DEFAULT_FORM_DATA);
     setOpenModal(false);
@@ -88,6 +108,15 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
             <button className="btn btn-primary" type="submit">
               Submit
             </button>
+            {selectedBuilding && (
+              <button
+                className="btn btn-error"
+                type="button"
+                onClick={onDelete}
+              >
+                Delete
+              </button>
+            )}
             <button className="btn btn-ghost" type="button" onClick={onCancel}>
               Cancel
             </button>
