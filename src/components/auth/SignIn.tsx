@@ -11,12 +11,11 @@ export type signUpFormData = {
   password: string;
 };
 
-
-
 const SignIn: React.FC<SignInProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { formData, setFormData, handleChange } =
-    useForm<signUpFormData>(INITIAL_SIGN_IN_FORM_DATA);
+  const { formData, setFormData, handleChange } = useForm<signUpFormData>(
+    INITIAL_SIGN_IN_FORM_DATA
+  );
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +32,7 @@ const SignIn: React.FC<SignInProps> = () => {
 
       if (error) throw error;
     } catch (error) {
-      console.log(error); // TODO: TOAST ERROR
+      alert(error);
     } finally {
       setLoading(false);
       setFormData(INITIAL_SIGN_IN_FORM_DATA);

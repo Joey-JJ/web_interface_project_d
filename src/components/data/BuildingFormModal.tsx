@@ -19,7 +19,9 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   selectedBuilding,
   getBuildings,
 }) => {
-  const { formData, handleChange, setFormData } = useForm(DEFAULT_BUILDING_FORM_DATA);
+  const { formData, handleChange, setFormData } = useForm(
+    DEFAULT_BUILDING_FORM_DATA
+  );
 
   const onDelete = async () => {
     const { error } = await supabase
