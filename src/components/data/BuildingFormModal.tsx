@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Building } from "../../types/Building";
-import { DEFAULT_FORM_DATA } from "../../utils/constants";
+import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
 import { supabase } from "../../utils/supabaseClient";
 
 type BuildingFormModalProps = {
@@ -19,7 +19,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
   selectedBuilding,
   getBuildings,
 }) => {
-  const { formData, handleChange, setFormData } = useForm(DEFAULT_FORM_DATA);
+  const { formData, handleChange, setFormData } = useForm(DEFAULT_BUILDING_FORM_DATA);
 
   const onDelete = async () => {
     const { error } = await supabase
@@ -32,13 +32,13 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
       return;
     }
 
-    setFormData(DEFAULT_FORM_DATA);
+    setFormData(DEFAULT_BUILDING_FORM_DATA);
     getBuildings?.();
     setOpenModal(false);
   };
 
   const onCancel = () => {
-    setFormData(selectedBuilding ?? DEFAULT_FORM_DATA);
+    setFormData(selectedBuilding ?? DEFAULT_BUILDING_FORM_DATA);
     setOpenModal(false);
   };
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "../../hooks/useForm";
 import { supabase } from "../../utils/supabaseClient";
 import { signInFormValidation } from "../../utils/signInFormValidation";
+import { INITIAL_SIGN_IN_FORM_DATA } from "../../utils/constants";
 
 type SignInProps = {};
 
@@ -10,15 +11,12 @@ export type signUpFormData = {
   password: string;
 };
 
-const initialFormData = {
-  email: "",
-  password: "",
-};
+
 
 const SignIn: React.FC<SignInProps> = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { formData, setFormData, handleChange } =
-    useForm<signUpFormData>(initialFormData);
+    useForm<signUpFormData>(INITIAL_SIGN_IN_FORM_DATA);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +36,7 @@ const SignIn: React.FC<SignInProps> = () => {
       console.log(error); // TODO: TOAST ERROR
     } finally {
       setLoading(false);
-      setFormData(initialFormData);
+      setFormData(INITIAL_SIGN_IN_FORM_DATA);
     }
   };
 
