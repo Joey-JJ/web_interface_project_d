@@ -7,26 +7,12 @@ import type { FormData } from "../../hooks/useForm";
 import type { Building } from "../../types/Building";
 import { BuildingFormData } from "../../types/BuildingFormData";
 import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
+import { useFetchBuildings } from "../../hooks/useFetchBuildings";
 
 const Table: React.FC = () => {
-  const [buildings, setBuildings] = useState([] as Building[]);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const currentBuildingRef = useRef<Building | undefined>();
-
-  const getBuildings = async () => {
-    const { data, error } = await supabase.from("buildings").select("*");
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    setBuildings(data as Building[]);
-  };
-
-  useEffect(() => {
-    getBuildings();
-  }, []);
+  const { buildings, refetchBuildings } = useFetchBuildings();
 
   const onSubmit = async (
     e: any,
@@ -75,7 +61,7 @@ const Table: React.FC = () => {
         onSubmit={onSubmit}
         openModal={openModal}
         setOpenModal={setOpenModal}
-        getBuildings={getBuildings}
+        getBuildings={refetchBuildings}
         selectedBuilding={currentBuildingRef.current}
       />
     </div>
