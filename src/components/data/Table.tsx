@@ -6,7 +6,7 @@ import { supabase } from "../../utils/supabaseClient";
 import type { FormData } from "../../hooks/useForm";
 import type { Building } from "../../types/Building";
 import { BuildingFormData } from "../../types/BuildingFormData";
-import { DEFAULT_FORM_DATA } from "../../utils/constants";
+import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
 
 const Table: React.FC = () => {
   const [buildings, setBuildings] = useState([] as Building[]);
@@ -45,7 +45,7 @@ const Table: React.FC = () => {
       return;
     }
 
-    setFormData(DEFAULT_FORM_DATA);
+    setFormData(DEFAULT_BUILDING_FORM_DATA);
     setOpenModal(false);
   };
 
