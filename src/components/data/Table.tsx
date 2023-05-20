@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 import BuildingFormModal from "./BuildingFormModal";
@@ -21,6 +21,8 @@ const Table: React.FC = () => {
       React.SetStateAction<FormData<BuildingFormData>>
     >
   ) => {
+    e.preventDefault();
+
     const { error } = await supabase
       .from("buildings")
       .update(formData)
