@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import BuildingFormModal from "../data/BuildingFormModal";
+import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
 
 type NavbarProps = {
   refetchBuildings: () => void;
@@ -22,12 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
 
     refetchBuildings();
 
-    setFormData({
-      name: "",
-      description: "",
-      lon: 0,
-      lat: 0,
-    });
+    setFormData(DEFAULT_BUILDING_FORM_DATA);
     setOpenModal(false);
   };
 
