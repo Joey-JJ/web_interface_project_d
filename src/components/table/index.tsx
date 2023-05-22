@@ -47,6 +47,7 @@ const Table: React.FC<TableProps> = ({ buildings, refetchBuildings }) => {
     }
 
     setFormData(DEFAULT_BUILDING_FORM_DATA);
+    refetchBuildings();
     setOpenModal(false);
     setLoading(false);
   };
