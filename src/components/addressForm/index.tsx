@@ -1,21 +1,33 @@
 import React, { FormEventHandler } from "react";
+import { validatePostalCode } from "../../utils/addressFormValidation";
 
 type AddressFormProps = {
   onSubmit: FormEventHandler<HTMLFormElement>;
 };
 
 const AddressForm: React.FC<AddressFormProps> = ({ onSubmit }) => {
+  const [postalCode, setPostalCode] = React.useState<string>("");
+
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-2 my-10">
+    <form
+      onSubmit={(e: React.FormEvent) => {
+        e.preventDefault();
+        console.log(validatePostalCode(postalCode));
+      }}
+      className="flex flex-col gap-2 my-10"
+    >
       <div className="flex gap-6">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Postal code</span>
           </label>
           <input
+            required
             type="text"
             placeholder="1234AB"
             className="input input-bordered w-32"
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
           />
         </div>
         <div className="form-control">
@@ -23,7 +35,11 @@ const AddressForm: React.FC<AddressFormProps> = ({ onSubmit }) => {
             <span className="label-text">House number</span>
           </label>
           <input
-            type="text"
+            required
+            maxLength={5}
+            min={1}
+            step={1}
+            type="number"
             placeholder="12"
             className="input input-bordered w-20"
           />
@@ -36,6 +52,7 @@ const AddressForm: React.FC<AddressFormProps> = ({ onSubmit }) => {
             type="text"
             placeholder="A"
             className="input input-bordered w-20"
+            maxLength={4}
           />
         </div>
       </div>
