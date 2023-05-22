@@ -36,7 +36,9 @@ const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
       <a href="/" className="btn btn-ghost normal-case text-xl">
         Data Hub - Project D
       </a>
-
+      <a href="/" className="link">
+        Address search
+      </a>
       <div className="flex gap-2">
         <button
           onClick={() => setOpenModal(true)}
