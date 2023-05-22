@@ -13,8 +13,18 @@ type TableProps = {
   refetchBuildings: () => void;
 };
 
+const fiterBuildings = (buildings: Building[], query: string) => {
+  return buildings.filter(
+    (building) =>
+      building.name.toLowerCase().includes(query.toLowerCase()) ||
+      building.description.toLowerCase().includes(query.toLowerCase())
+  );
+};
+
 const Table: React.FC<TableProps> = ({ buildings, refetchBuildings }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const currentBuildingRef = useRef<Building | undefined>();
 
   const onSubmit = async (
@@ -38,28 +48,46 @@ const Table: React.FC<TableProps> = ({ buildings, refetchBuildings }) => {
 
     setFormData(DEFAULT_BUILDING_FORM_DATA);
     setOpenModal(false);
+    setLoading(false);
   };
 
-  if (buildings.length === 0) {
+  const filteredBuildings = fiterBuildings(buildings, searchQuery);
+
+  if (!loading && buildings.length === 0) {
     return <div>No buildings in the database</div>;
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="w-screen mx-24 xl:max-w-4xl">
+      <input
+        type="text"
+        className="input input-primary mb-2"
+        placeholder="Search..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <table className="table w-full">
         <TableHeader />
         <tbody>
-          {buildings.map((building: Building, index) => (
-            <TableRow
-              key={index}
-              index={index + 1}
-              buildingData={building}
-              onClick={() => {
-                currentBuildingRef.current = building;
-                setOpenModal(true);
-              }}
-            />
-          ))}
+          {filteredBuildings.length > 0 ? (
+            filteredBuildings.map((building: Building, index) => (
+              <TableRow
+                key={index}
+                index={index + 1}
+                buildingData={building}
+                onClick={() => {
+                  currentBuildingRef.current = building;
+                  setOpenModal(true);
+                }}
+              />
+            ))
+          ) : (
+            <tr>
+              <td colSpan={5} className=" text-center">
+                No buildings found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <BuildingFormModal
