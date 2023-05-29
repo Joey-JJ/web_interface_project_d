@@ -15,3 +15,4 @@ export const DEFAULT_BUILDING_FORM_DATA = {
 };
 
 export const BUILDING_TABLE_NAME = "buildings";
+export const BUILDING_IMAGE_BUCKET = "building-images";

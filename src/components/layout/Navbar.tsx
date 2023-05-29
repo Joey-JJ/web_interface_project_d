@@ -13,7 +13,11 @@ type NavbarProps = {
 const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const addBuilding = async (e: any, formData: any, setFormData: any) => {
+  const addBuilding = async (
+    e: React.FormEvent,
+    formData: FormData,
+    setFormData: any
+  ) => {
     e.preventDefault();
 
     const { error } = await supabase
