@@ -6,7 +6,10 @@ import { supabase } from "../../utils/supabaseClient";
 import type { FormData } from "../../hooks/useForm";
 import type { Building } from "../../types/Building";
 import { BuildingFormData } from "../../types/BuildingFormData";
-import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
+import {
+  BUILDING_TABLE_NAME,
+  DEFAULT_BUILDING_FORM_DATA,
+} from "../../utils/constants";
 
 type TableProps = {
   buildings: Building[];
@@ -37,7 +40,7 @@ const Table: React.FC<TableProps> = ({ buildings, refetchBuildings }) => {
     e.preventDefault();
 
     const { error } = await supabase
-      .from("buildings")
+      .from(BUILDING_TABLE_NAME)
       .update(formData)
       .eq("id", currentBuildingRef.current!.id);
 

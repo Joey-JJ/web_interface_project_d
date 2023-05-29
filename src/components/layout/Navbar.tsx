@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 import BuildingFormModal from "../table/BuildingFormModal";
-import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
+import {
+  BUILDING_TABLE_NAME,
+  DEFAULT_BUILDING_FORM_DATA,
+} from "../../utils/constants";
 
 type NavbarProps = {
   refetchBuildings: () => void;
@@ -14,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
     e.preventDefault();
 
     const { error } = await supabase
-      .from("buildings")
+      .from(BUILDING_TABLE_NAME)
       .insert([{ ...formData }]);
 
     if (error) {

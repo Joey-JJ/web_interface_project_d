@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useForm } from "../../hooks/useForm";
 import { Building } from "../../types/Building";
-import { DEFAULT_BUILDING_FORM_DATA } from "../../utils/constants";
+import {
+  BUILDING_TABLE_NAME,
+  DEFAULT_BUILDING_FORM_DATA,
+} from "../../utils/constants";
 import { supabase } from "../../utils/supabaseClient";
 
 type BuildingFormModalProps = {
@@ -25,7 +28,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
 
   const onDelete = async () => {
     const { error } = await supabase
-      .from("buildings")
+      .from(BUILDING_TABLE_NAME)
       .delete()
       .eq("id", selectedBuilding!.id);
 
