@@ -61,11 +61,11 @@ function Test() {
       });
 
     if (error) {
-      console.log(error);
+      alert(error.message);
       return;
     }
 
-    const { data } = await supabase.storage
+    const { data } = supabase.storage
       .from(BUILDING_IMAGE_BUCKET)
       .getPublicUrl(`${session?.user.id}/${file.name}`);
 
