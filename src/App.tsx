@@ -65,8 +65,8 @@ function Test() {
       return;
     }
 
-    const { data } = supabase.storage
-      .from("public-bucket")
+    const { data } = await supabase.storage
+      .from(BUILDING_IMAGE_BUCKET)
       .getPublicUrl(`${session?.user.id}/${file.name}`);
 
     window.open(data.publicUrl);
