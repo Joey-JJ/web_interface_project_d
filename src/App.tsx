@@ -8,7 +8,7 @@ import AddressForm from "./components/addressForm";
 import { supabase } from "./utils/supabaseClient";
 import { BUILDING_IMAGE_BUCKET } from "./utils/constants";
 
-const App: React.FC = () => {
+function App() {
   const { session, loading } = useSession();
   const { buildings, refetchBuildings } = useFetchBuildings();
 
@@ -35,7 +35,7 @@ const App: React.FC = () => {
       </main>
     </>
   );
-};
+}
 
 export default App;
 
