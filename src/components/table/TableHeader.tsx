@@ -9,6 +9,7 @@ const TableHeader: React.FC = () => {
         <th>Description</th>
         <th>Longitude</th>
         <th>Latitude</th>
+        <th>Image URL</th>
       </tr>
     </thead>
   );

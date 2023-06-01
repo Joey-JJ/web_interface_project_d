@@ -54,6 +54,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
         description: selectedBuilding.description,
         lon: selectedBuilding.lon,
         lat: selectedBuilding.lat,
+        imageUrl: selectedBuilding.imageUrl,
       });
     }
   }, [selectedBuilding, setFormData]);
@@ -107,6 +108,14 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
               onChange={handleChange}
               name="lat"
               value={formData.lat}
+            />
+            <input
+              type="string"
+              placeholder="Image URL"
+              className="input input-sm input-primary"
+              onChange={handleChange}
+              name="imageUrl"
+              value={formData.imageUrl}
             />
           </div>
           <div className="modal-action">
