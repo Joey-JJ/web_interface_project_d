@@ -39,11 +39,11 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="navbar bg-base-200 flex justify-between px-4">
-      <a href="/" className="btn btn-ghost normal-case text-xl">
+      <Link to="/" className="btn btn-ghost normal-case text-xl">
         Data Hub - Project D
-      </a>
+      </Link>
       <div className="flex gap-4">
-        <Link to="/buildings" className="link">
+        <Link to="/" className="link">
           Buildings
         </Link>
         <Link to="/address_search" className="link">

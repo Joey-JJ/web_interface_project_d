@@ -2,7 +2,6 @@ import React from "react";
 import useSession from "./hooks/useSession";
 import SignIn from "./components/auth/SignIn";
 import Navbar from "./components/layout/Navbar";
-import Table from "./components/table";
 import { supabase } from "./utils/supabaseClient";
 import { BUILDING_IMAGE_BUCKET } from "./utils/constants";
 import { Outlet } from "react-router-dom";

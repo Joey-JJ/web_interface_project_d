@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/buildings",
+        path: "/",
         element: <Table />,
       },
       {
