@@ -17,3 +17,7 @@ export const DEFAULT_BUILDING_FORM_DATA = {
 
 export const BUILDING_TABLE_NAME = "buildings";
 export const BUILDING_IMAGE_BUCKET = "building-images";
+
+export const ROOT_ROUTE = "/";
+export const ADDRESS_SEARCH_ROUTE = "/address_search";
+export const IMAGES_ROUTE = "/images";

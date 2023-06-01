@@ -6,6 +6,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/layout/ErrorPage";
 import AddressForm from "./components/addressForm";
 import Table from "./components/table";
+import {
+  ADDRESS_SEARCH_ROUTE,
+  IMAGES_ROUTE,
+  ROOT_ROUTE,
+} from "./utils/constants";
 
 const router = createBrowserRouter([
   {
@@ -14,15 +19,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: ROOT_ROUTE,
         element: <Table />,
       },
       {
-        path: "/address_search",
+        path: ADDRESS_SEARCH_ROUTE,
         element: <AddressForm />,
       },
       {
-        path: "/images",
+        path: IMAGES_ROUTE,
         element: <Test />,
       },
     ],

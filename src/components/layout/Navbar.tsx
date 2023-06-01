@@ -4,13 +4,15 @@ import BuildingFormModal from "../table/BuildingFormModal";
 import {
   BUILDING_TABLE_NAME,
   DEFAULT_BUILDING_FORM_DATA,
+  ROOT_ROUTE,
 } from "../../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useFetchBuildings } from "../../hooks/useFetchBuildings";
 
 const Navbar: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const { refetchBuildings } = useFetchBuildings();
+  const { pathname } = useLocation();
 
   const addBuilding = async (
     e: React.FormEvent,
@@ -54,12 +56,14 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
       <div className="flex gap-2">
-        <button
-          onClick={() => setOpenModal(true)}
-          className="btn btn-primary btn-sm"
-        >
-          Add building
-        </button>
+        {pathname === ROOT_ROUTE && (
+          <button
+            onClick={() => setOpenModal(true)}
+            className="btn btn-primary btn-sm"
+          >
+            Add building
+          </button>
+        )}
         <button onClick={onLogout} className="btn btn-secondary btn-sm">
           Log out
         </button>
