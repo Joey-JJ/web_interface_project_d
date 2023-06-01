@@ -3,4 +3,5 @@ export type BuildingFormData = {
   description: string;
   lon: number;
   lat: number;
+  imageUrl: string;
 };

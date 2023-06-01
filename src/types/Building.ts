@@ -4,4 +4,5 @@ export type Building = {
   description: string;
   lon: number;
   lat: number;
+  imageUrl: string;
 };

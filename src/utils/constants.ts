@@ -12,6 +12,7 @@ export const DEFAULT_BUILDING_FORM_DATA = {
   description: "",
   lon: 0,
   lat: 0,
+  imageUrl: "",
 };
 
 export const BUILDING_TABLE_NAME = "buildings";
