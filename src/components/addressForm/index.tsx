@@ -1,11 +1,7 @@
 import React, { FormEventHandler } from "react";
 import { validatePostalCode } from "../../utils/addressFormValidation";
 
-type AddressFormProps = {
-  onSubmit: FormEventHandler<HTMLFormElement>;
-};
-
-const AddressForm: React.FC<AddressFormProps> = ({ onSubmit }) => {
+const AddressForm: React.FC = () => {
   const [postalCode, setPostalCode] = React.useState<string>("");
 
   return (

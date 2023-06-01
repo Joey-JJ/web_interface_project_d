@@ -3,14 +3,12 @@ import useSession from "./hooks/useSession";
 import SignIn from "./components/auth/SignIn";
 import Navbar from "./components/layout/Navbar";
 import Table from "./components/table";
-import { useFetchBuildings } from "./hooks/useFetchBuildings";
-import AddressForm from "./components/addressForm";
 import { supabase } from "./utils/supabaseClient";
 import { BUILDING_IMAGE_BUCKET } from "./utils/constants";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const { session, loading } = useSession();
-  const { buildings, refetchBuildings } = useFetchBuildings();
 
   if (loading)
     return (
@@ -23,15 +21,9 @@ function App() {
 
   return (
     <>
-      <Navbar refetchBuildings={refetchBuildings} />
+      <Navbar />
       <main className="App h-[calc(100vh-64px)] flex flex-col items-center justify-center bg-base-300">
-        <AddressForm
-          onSubmit={(e: React.FormEvent) => {
-            e.preventDefault();
-          }}
-        />
-        <Test />
-        <Table buildings={buildings} refetchBuildings={refetchBuildings} />
+        <Outlet />
       </main>
     </>
   );
@@ -39,7 +31,7 @@ function App() {
 
 export default App;
 
-function Test() {
+export function Test() {
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const { session } = useSession();
 

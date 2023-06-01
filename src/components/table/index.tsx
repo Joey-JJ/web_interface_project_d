@@ -10,11 +10,7 @@ import {
   BUILDING_TABLE_NAME,
   DEFAULT_BUILDING_FORM_DATA,
 } from "../../utils/constants";
-
-type TableProps = {
-  buildings: Building[];
-  refetchBuildings: () => void;
-};
+import { useFetchBuildings } from "../../hooks/useFetchBuildings";
 
 const fiterBuildings = (buildings: Building[], query: string) => {
   return buildings.filter(
@@ -24,7 +20,8 @@ const fiterBuildings = (buildings: Building[], query: string) => {
   );
 };
 
-const Table: React.FC<TableProps> = ({ buildings, refetchBuildings }) => {
+const Table: React.FC = () => {
+  const { buildings, refetchBuildings } = useFetchBuildings();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");

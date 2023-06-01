@@ -5,13 +5,12 @@ import {
   BUILDING_TABLE_NAME,
   DEFAULT_BUILDING_FORM_DATA,
 } from "../../utils/constants";
+import { Link } from "react-router-dom";
+import { useFetchBuildings } from "../../hooks/useFetchBuildings";
 
-type NavbarProps = {
-  refetchBuildings: () => void;
-};
-
-const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
+const Navbar: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const { refetchBuildings } = useFetchBuildings();
 
   const addBuilding = async (
     e: React.FormEvent,
@@ -43,9 +42,17 @@ const Navbar: React.FC<NavbarProps> = ({ refetchBuildings }) => {
       <a href="/" className="btn btn-ghost normal-case text-xl">
         Data Hub - Project D
       </a>
-      <a href="/" className="link">
-        Address search
-      </a>
+      <div className="flex gap-4">
+        <Link to="/buildings" className="link">
+          Buildings
+        </Link>
+        <Link to="/address_search" className="link">
+          Address search
+        </Link>
+        <Link to="/images" className="link">
+          Images
+        </Link>
+      </div>
       <div className="flex gap-2">
         <button
           onClick={() => setOpenModal(true)}
