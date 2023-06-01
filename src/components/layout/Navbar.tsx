@@ -56,14 +56,14 @@ const Navbar: React.FC = () => {
         </Link>
       </div>
       <div className="flex gap-2">
-        {pathname === ROOT_ROUTE && (
-          <button
-            onClick={() => setOpenModal(true)}
-            className="btn btn-primary btn-sm"
-          >
-            Add building
-          </button>
-        )}
+        <button
+          onClick={() => setOpenModal(true)}
+          className={`btn btn-primary btn-sm ${
+            pathname !== ROOT_ROUTE && "invisible"
+          }`}
+        >
+          Add building
+        </button>
         <button onClick={onLogout} className="btn btn-secondary btn-sm">
           Log out
         </button>
