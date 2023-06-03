@@ -1,51 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { supabase } from "../../utils/supabaseClient";
 import { BUILDING_IMAGE_BUCKET } from "../../utils/constants";
 import useSession from "../../hooks/useSession";
-
-type imageData = {
-  name: string;
-  url: string;
-};
+import useFetchImageData from "../../hooks/useFetchImageData";
 
 const ImageGrid: React.FC = () => {
   const { session } = useSession();
-  const [imageUrls, setImageUrls] = useState<imageData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<boolean>(false);
-
-  const fetchImageData = useCallback(async () => {
-    if (!session?.user.id) return;
-
-    const { data: imageData, error } = await supabase.storage
-      .from(BUILDING_IMAGE_BUCKET)
-      .list(session?.user.id, {
-        limit: 100,
-        offset: 0,
-        sortBy: { column: "name", order: "asc" },
-      });
-
-    if (error) {
-      alert(error.message);
-      setError(true);
-      return;
-    }
-
-    const urlData = imageData.map((image) => {
-      const { data: url } = supabase.storage
-        .from(BUILDING_IMAGE_BUCKET)
-        .getPublicUrl(`${session?.user.id}/${image.name}`);
-
-      return { name: image.name, url: url.publicUrl };
-    });
-
-    setImageUrls(urlData);
-    setLoading(false);
-  }, [session?.user.id]);
-
-  useEffect(() => {
-    fetchImageData();
-  }, [session?.user.id, fetchImageData]);
+  const { imageUrls, fetchImageData, loading, error } = useFetchImageData();
 
   const copyHandler = async (url: string) => {
     await navigator.clipboard.writeText(url);
@@ -62,7 +23,7 @@ const ImageGrid: React.FC = () => {
       return;
     }
 
-    fetchImageData();
+    await fetchImageData();
   };
 
   if (loading) return <div>Loading...</div>;
