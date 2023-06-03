@@ -10,7 +10,7 @@ const AddressForm: React.FC = () => {
         e.preventDefault();
         console.log(validatePostalCode(postalCode));
       }}
-      className="flex flex-col gap-2 my-10"
+      className="flex flex-col gap-2"
     >
       <div className="flex gap-6">
         <div className="form-control">

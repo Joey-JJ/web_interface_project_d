@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App, { Test } from "./App";
+import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./components/layout/ErrorPage";
-import AddressForm from "./components/addressForm";
-import Table from "./components/table";
+import ErrorPage from "./components/pages/ErrorPage";
 import {
   ADDRESS_SEARCH_ROUTE,
   IMAGES_ROUTE,
   ROOT_ROUTE,
 } from "./utils/constants";
+import ImagesPage from "./components/pages/ImagesPage";
+import BuildingsPage from "./components/pages/BuildingsPage";
+import AddressSearchPage from "./components/pages/AddressSearchPage";
 
 const router = createBrowserRouter([
   {
@@ -20,15 +21,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: ROOT_ROUTE,
-        element: <Table />,
+        element: <BuildingsPage />,
       },
       {
         path: ADDRESS_SEARCH_ROUTE,
-        element: <AddressForm />,
+        element: <AddressSearchPage />,
       },
       {
         path: IMAGES_ROUTE,
-        element: <Test />,
+        element: <ImagesPage />,
       },
     ],
   },
