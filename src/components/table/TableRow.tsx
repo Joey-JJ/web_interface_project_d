@@ -25,10 +25,11 @@ const TableRow: React.FC<TableRowProps> = ({
       <td>
         <a
           rel="noopener noreferrer"
-          className="link link-primary"
+          className={`link link-primary ${!imageUrl && " text-gray-500"}`}
           target="_blank"
-          href={imageUrl}
+          href={imageUrl ?? "#"}
           onClick={(e) => e.stopPropagation()}
+          style={{ pointerEvents: !imageUrl ? "none" : "auto" }}
         >
           Image
         </a>

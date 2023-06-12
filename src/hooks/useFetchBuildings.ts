@@ -28,8 +28,8 @@ export const useFetchBuildings = (): UseFetchBuildingsResult => {
     getBuildings();
   }, []);
 
-  const refetchBuildings = () => {
-    getBuildings();
+  const refetchBuildings = async () => {
+    await getBuildings();
   };
 
   return { buildings, refetchBuildings };

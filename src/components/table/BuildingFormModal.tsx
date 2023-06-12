@@ -94,10 +94,10 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
             />
             <input
               type="text"
-              placeholder="Longitude"
+              placeholder="Bag ID"
               className="input input-sm input-primary"
               onChange={handleChange}
-              name="lon"
+              name="bagId"
               value={formData.bagId}
             />
             <input
