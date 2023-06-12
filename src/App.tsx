@@ -3,7 +3,6 @@ import useSession from "./hooks/useSession";
 import SignIn from "./components/auth/SignIn";
 import Navbar from "./components/layout/Navbar";
 import { Outlet } from "react-router-dom";
-import { fetchAddress } from "./utils/fetchAddress";
 
 function App() {
   const { session, loading } = useSession();
@@ -21,16 +20,6 @@ function App() {
     <>
       <Navbar />
       <Outlet />
-      <button
-        onClick={() =>
-          fetchAddress({
-            postalCode: "3082ec",
-            houseNumber: 30,
-          })
-        }
-      >
-        Click
-      </button>
     </>
   );
 }

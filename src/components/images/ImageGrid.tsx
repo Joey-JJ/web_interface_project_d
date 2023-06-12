@@ -3,15 +3,11 @@ import { supabase } from "../../utils/supabaseClient";
 import { BUILDING_IMAGE_BUCKET } from "../../utils/constants";
 import useSession from "../../hooks/useSession";
 import useFetchImageData from "../../hooks/useFetchImageData";
+import { copyToClipboard } from "../../utils/copyToClipboard";
 
 const ImageGrid: React.FC = () => {
   const { session } = useSession();
   const { imageUrls, fetchImageData, loading, error } = useFetchImageData();
-
-  const copyHandler = async (url: string) => {
-    await navigator.clipboard.writeText(url);
-    alert("Copied to clipboard!");
-  };
 
   const deleteHandler = async (imageName: string) => {
     const { error } = await supabase.storage
@@ -45,7 +41,7 @@ const ImageGrid: React.FC = () => {
             />
             <div className="flex gap-4">
               <button
-                onClick={() => copyHandler(imageData.url)}
+                onClick={() => copyToClipboard(imageData.url)}
                 className="btn btn-primary btn-xs"
               >
                 Copy URL
