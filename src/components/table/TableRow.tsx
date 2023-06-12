@@ -12,7 +12,7 @@ const TableRow: React.FC<TableRowProps> = ({
   buildingData,
   onClick,
 }) => {
-  const { name, description, lon, lat, imageUrl } = buildingData;
+  const { name, description, bagId, imageUrl } = buildingData;
 
   return (
     <tr onClick={onClick} className="hover hover:cursor-pointer">
@@ -21,8 +21,7 @@ const TableRow: React.FC<TableRowProps> = ({
       <td className="max-w-xs overflow-x-hidden whitespace-break-spaces">
         {description}
       </td>
-      <td>{lon}</td>
-      <td>{lat}</td>
+      <td>{bagId}</td>
       <td>
         <a
           rel="noopener noreferrer"

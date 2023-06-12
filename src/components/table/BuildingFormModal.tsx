@@ -52,8 +52,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
       setFormData({
         name: selectedBuilding.name,
         description: selectedBuilding.description,
-        lon: selectedBuilding.lon,
-        lat: selectedBuilding.lat,
+        bagId: selectedBuilding.bagId,
         imageUrl: selectedBuilding.imageUrl,
       });
     }
@@ -94,20 +93,12 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
               value={formData.description}
             />
             <input
-              type="number"
+              type="text"
               placeholder="Longitude"
               className="input input-sm input-primary"
               onChange={handleChange}
               name="lon"
-              value={formData.lon}
-            />
-            <input
-              type="number"
-              placeholder="Latitude"
-              className="input input-sm input-primary"
-              onChange={handleChange}
-              name="lat"
-              value={formData.lat}
+              value={formData.bagId}
             />
             <input
               type="string"

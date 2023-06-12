@@ -7,8 +7,7 @@ const TableHeader: React.FC = () => {
         <th></th>
         <th>Name</th>
         <th>Description</th>
-        <th>Longitude</th>
-        <th>Latitude</th>
+        <th>Bag ID</th>
         <th>Image URL</th>
       </tr>
     </thead>

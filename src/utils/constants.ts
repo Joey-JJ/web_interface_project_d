@@ -21,7 +21,6 @@ export const INITIAL_SIGN_IN_FORM_DATA = {
 export const DEFAULT_BUILDING_FORM_DATA = {
   name: "",
   description: "",
-  lon: 0,
-  lat: 0,
+  bagId: "",
   imageUrl: "",
 };
