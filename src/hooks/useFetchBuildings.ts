@@ -5,11 +5,13 @@ import { BUILDING_TABLE_NAME } from "../utils/constants";
 
 type UseFetchBuildingsResult = {
   buildings: Building[];
-  refetchBuildings: () => void;
+  refetchBuildings: () => Promise<void>;
+  loading: boolean;
 };
 
 export const useFetchBuildings = (): UseFetchBuildingsResult => {
   const [buildings, setBuildings] = useState<Building[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getBuildings = async () => {
     const { data, error } = await supabase
@@ -17,20 +19,19 @@ export const useFetchBuildings = (): UseFetchBuildingsResult => {
       .select("*");
 
     if (error) {
-      alert(error.message);
+      console.log(error.message);
       return;
     }
 
     setBuildings(data as Building[]);
+    setLoading(false);
   };
 
   useEffect(() => {
-    getBuildings();
+    (async () => {
+      await getBuildings();
+    })();
   }, []);
 
-  const refetchBuildings = async () => {
-    await getBuildings();
-  };
-
-  return { buildings, refetchBuildings };
+  return { buildings, refetchBuildings: getBuildings, loading };
 };

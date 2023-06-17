@@ -7,12 +7,9 @@ import { Outlet } from "react-router-dom";
 function App() {
   const { session, loading } = useSession();
 
-  if (loading)
-    return (
-      <div className="h-screen w-screen text-2xl flex items-center justify-center">
-        Loading...
-      </div>
-    );
+  if (loading) {
+    return null;
+  }
 
   if (!session) return <SignIn />;
 

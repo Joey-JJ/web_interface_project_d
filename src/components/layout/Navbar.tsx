@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
       alert(error.message);
     }
 
-    refetchBuildings();
+    await refetchBuildings();
 
     setFormData(DEFAULT_BUILDING_FORM_DATA);
     setOpenModal(false);

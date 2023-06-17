@@ -21,9 +21,8 @@ const fiterBuildings = (buildings: Building[], query: string) => {
 };
 
 const Table: React.FC = () => {
-  const { buildings, refetchBuildings } = useFetchBuildings();
+  const { buildings, refetchBuildings, loading } = useFetchBuildings();
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const currentBuildingRef = useRef<Building | undefined>();
 
@@ -47,14 +46,17 @@ const Table: React.FC = () => {
     }
 
     setFormData(DEFAULT_BUILDING_FORM_DATA);
-    refetchBuildings();
+    await refetchBuildings();
     setOpenModal(false);
-    setLoading(false);
   };
 
   const filteredBuildings = fiterBuildings(buildings, searchQuery);
 
-  if (!loading && buildings.length === 0) {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (buildings.length === 0) {
     return <div>No buildings in the database</div>;
   }
 

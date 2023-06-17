@@ -10,8 +10,8 @@ import { supabase } from "../../utils/supabaseClient";
 type BuildingFormModalProps = {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  onSubmit: (...args: any[]) => void;
-  getBuildings?: () => void;
+  onSubmit: (...args: any[]) => Promise<void>;
+  getBuildings?: () => Promise<void>;
   selectedBuilding?: Building;
 };
 
@@ -38,7 +38,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
     }
 
     setFormData(DEFAULT_BUILDING_FORM_DATA);
-    getBuildings?.();
+    await getBuildings?.();
     setOpenModal(false);
   };
 
@@ -70,7 +70,7 @@ const BuildingFormModal: React.FC<BuildingFormModalProps> = ({
       <div className="modal">
         <form
           className="modal-box"
-          onSubmit={(e) => onSubmit(e, formData, setFormData)}
+          onSubmit={async (e) => await onSubmit(e, formData, setFormData)}
         >
           <h3 className="font-bold text-lg">
             You are now editing: {selectedBuilding?.name ?? "New building"}
