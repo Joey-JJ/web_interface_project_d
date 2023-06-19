@@ -32,7 +32,7 @@ const ImageGrid: React.FC = () => {
         return (
           <div
             key={imageData.name}
-            className="flex flex-col items-center justify-center gap-4 border-2 border-base-100 pb-6 rounded-sm overflow-x-scroll"
+            className="flex flex-col items-center justify-center gap-4 border-2 border-base-100 pb-6 rounded-sm"
           >
             <img
               src={imageData.url}
